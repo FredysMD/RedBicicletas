@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+
+  nav.navbar.fixed-top.navbar-dark.bg-dark
+    a.navbar-brand(href='#') BiciApp
+
+  .jumbotron.jumbotron-fluid
+    .container
+      h1.display-4 Red de bicicletas
+        p.lead
+          | Bienvenido a la comunidad de ciclistas de Aracataca
+  h1.text-center.text-muted Aracataca
+  #main_map
+
+
+  script(src="/javascripts/map.js")
