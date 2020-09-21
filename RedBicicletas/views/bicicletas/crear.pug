@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+    a(href="/bicicletas") Inicio
+  
+    .container
+      h1.text-muted Nueva bicicleta
+      form(action="/bicicletas/crear", method="post")
+          label(for="id") Id:
+          input#id(type="text",name="id")
+          br
+          label(for="modelo") Modelo:
+          input#modelo(type="text",name="modelo")
+          br
+          label(for="color") Color:
+          input#color(type="text",name="color")
+          br
+          label(for="latitud") Latitud:
+          input#latitud(type="lat",name="latitud")
+          br
+          label(for="longitud") Longitud:
+          input#longitud(type="lng",name="longitud")
+          br
+          input.btn-bnt-primary(type="submit", value="Registrar bicicleta")

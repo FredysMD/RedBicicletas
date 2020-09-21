@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+   a(type="button", href="/bicicletas/crear") Nueva bicicleta
+   
+   .container
+      each bicicleta in bicicletas
+        .card(style='width: 18rem;')
+          .card-body
+            h5.card-title   Bicicleta número: #{bicicleta.id}
+            h6.card-subtitle.mb-2.text-muted  #{bicicleta.color}
+            p.card-text
+              | Modelo:  #{bicicleta.modelo}
+            p.card-text
+              | Ubicación: #{bicicleta.ubicacion}
+            form(action="/bicicletas/eliminar/"+bicicleta.id+"/", method="post")
+               input(type="hidden",name="id" value=bicicleta.id)
+               button(type="submit", name="submit_name", value="submit_value" class="btn") 
+                = "Eliminar"
+          
+            a.card-link(href="/bicicletas/actualizar/"+bicicleta.id) Editar
