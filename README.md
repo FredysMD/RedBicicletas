@@ -6,8 +6,8 @@ Curso del lado del servidor en coursera
 
 1. Nodejs
 2. Express (view = pug)
-3. Mongodb
+3. Mongodb 
 4. HTM-to-Pug (https://html-to-pug.com/)
 5. Leaflet   (https://leafletjs.com/)
-
+6. Jasmine (Testing)
  
