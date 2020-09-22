@@ -37,11 +37,11 @@ Bicicleta.deleteById = function(idbicicleta){
     }
 }
 
-
+/*
 var bici1 = new Bicicleta(1,"rojo", "urbana",[10.5952489,-74.19438]);
-var bici2 = new Bicicleta(1,"verde", "clasica",[10.5952412,-74.19438]);
+var bici2 = new Bicicleta(2,"verde", "clasica",[10.5952412,-74.19438]);
 
 Bicicleta.add(bici1);
 Bicicleta.add(bici2);
-
+*/
 module.exports = Bicicleta;
