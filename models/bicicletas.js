@@ -1,47 +1,42 @@
-var Bicicleta = function(id,color,modelo,ubicacion){
-    
-    this.id = id;
-    this.color = color;
-    this.modelo = modelo;
-    this.ubicacion = ubicacion;
-}
 
-Bicicleta.prototype.toString = function(){
-    return 'id: '+ this.id + ' color: '+ this.color;
-}
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-Bicicleta.allBicis = [];
-
-Bicicleta.add = function(agregarBicicleta){
-    Bicicleta.allBicis.push(agregarBicicleta);
-}
-
-Bicicleta.findById = function(id){
-     var biciId = Bicicleta.allBicis.find(x => x.id == id);
-     
-     if(biciId){
-         return biciId
-     }else{
-         throw new Error(`Error, ${id}`);
-     }
-}
-
-Bicicleta.deleteById = function(idbicicleta){
-
-    for (let i = 0; i < Bicicleta.allBicis.length; i++) {
-        if(Bicicleta.allBicis[i].id == idbicicleta){
-            Bicicleta.allBicis.splice(i,1);
-            break;
-        }
-        
+var bicicletaSchema = Schema({
+    code : Number,
+    color:String,
+    modelo:String,
+    ubicacion:{
+        type: [Number], idex:{type:'2dsphere', sparse:true}
     }
+});
+
+bicicletaSchema.statics.CrateInstance = function(code,color, modelo, ubicacion){
+
+    return new this({
+        code:code,
+        color:color,
+        modelo:modelo,
+        ubicacion:ubicacion
+    });
 }
 
-/*
-var bici1 = new Bicicleta(1,"rojo", "urbana",[10.5952489,-74.19438]);
-var bici2 = new Bicicleta(2,"verde", "clasica",[10.5952412,-74.19438]);
+bicicletaSchema.methods.toString = function(){
+    return 'code '+this.code + ' color'+this.color;
+}
 
-Bicicleta.add(bici1);
-Bicicleta.add(bici2);
-*/
-module.exports = Bicicleta;
+bicicletaSchema.statics.allBicis = function(cb){
+    return this.find({},cb);
+}
+bicicletaSchema.statics.add = function(bicicleta,cb){
+    this.create(bicicleta,cb);
+}
+bicicletaSchema.statics.findByCode = function(code,cb){
+    return this.findOne({code:code},cb);
+}
+bicicletaSchema.statics.removeId = function(code,cb){
+    return this.deleteOne({code:code},cb);
+}
+
+module.exports = mongoose.model('Bicicletas',bicicletaSchema);
+

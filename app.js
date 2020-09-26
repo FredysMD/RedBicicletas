@@ -8,8 +8,21 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var bicicletasRouter = require('./routes/bicicletas');
 var bicicletasRouterApi = require('./routes/api/bicicletas');
+var usuarioRouterApi = require('./routes/api/usuario');
 
 var app = express();
+
+var mongoose = require('mongoose');
+
+var mongoDB = 'mongodb://localhost/red_bicicletas';
+
+mongoose.connect(mongoDB, {useNewUrlParser:true, useUnifiedTopology: true});
+
+mongoose.Promise = global.Promise;
+
+var db = mongoose.connection;
+
+db.on('error ', console.error.bind(console,'Mongodb error connection!'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/bicicletas', bicicletasRouter);
 app.use('/api/bicicletas', bicicletasRouterApi);
+app.use('/api/usuarios', usuarioRouterApi);
 
 
 // catch 404 and forward to error handler
